@@ -41,6 +41,7 @@ import {CreateCourseStep1Component} from './create-course/create-course-step-1/c
 import {FileUploadComponent} from './file-upload/file-upload.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {LoginReactiveComponent} from './login-reactive/login-reactive.component';
+import { PasswordStrengthDiirective } from './directives/password-strength.directive';
 
 @NgModule({
     declarations: [
@@ -57,7 +58,8 @@ import {LoginReactiveComponent} from './login-reactive/login-reactive.component'
         CreateCourseStep3Component,
         AddressFormComponent,
         FileUploadComponent,
-        LoginReactiveComponent
+        LoginReactiveComponent,
+        PasswordStrengthDiirective
     ],
     imports: [
         BrowserModule,
