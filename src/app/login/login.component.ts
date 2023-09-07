@@ -9,17 +9,11 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
+  constructor() { }
 
-  constructor() {
+  ngOnInit() { }
 
-
-  }
-
-  ngOnInit() {
-
-  }
-
-  login(loginForm: NgForm){
+  login(loginForm: NgForm) {
     console.log(loginForm.value, loginForm.valid)
   }
 
