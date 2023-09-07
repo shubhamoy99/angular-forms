@@ -2,24 +2,29 @@
   <mat-card-title>Login</mat-card-title>
   <mat-card-content>
 
-    <form class="login-form data-form" #loginForm="ngForm"> <!--#loginForm - This Points to the instance of ng Form-->
-
+    <form class="login-form data-form" #loginForm="ngForm" (ngSubmit)="login(loginForm, $event)">
+      <!--#loginForm - This Points to the instance of ng Form-->
+      <!-- prevent submit for http post request -->
       <mat-form-field>
 
         <!-- State : ng-touched/untouched
         ng-dirty/ng-pristine 
       ng-valid/invalid-->
 
-        <input matInput type="email" name="email" 
-        ngModel #email="ngModel"
-        required 
-        email 
-        minlength="4" 
-        maxlength="20"
-        pattern="[a-z]+"
-        placeholder="Email">
+        <input matInput type="email" name="email" [(ngModel)]="val.email" #email="ngModel" [ngModelOptions]="{}"
+          required email minlength="4" maxlength="20" placeholder="Email">
+        <!-- name="email" -->
+        <!-- pattern="[a-z]+" -->
+        <!-- [ngModelOptions]=
+          "{updateOn: 'blur/change/ submit'}"  by on untouched/default/on submission 
+            name: 'Email'
+            standalone: true ngForm directive doesn't know the form value
+
+      -->
+        <!-- (ngModelChange)="onEmailChange($event)" to log each key stroke change ; updateOn is default change-->
         <!--ngModel-Directive = Binds to key up event
         required/ minlength/ pattern/ email/ maxlength - 5 Form Validation-->
+        <!-- Populate with default value [ngModel] ngModel in square bracket : unidirectional binding-->
         <mat-error *ngIf="email.errors?.required">
           Email Mandatory
         </mat-error>
@@ -33,13 +38,16 @@
 
       <mat-form-field>
 
-        <input matInput type="password" name="password" 
-        ngModel #password="ngModel" required
-        placeholder="Password">
-
+        <input matInput type="password" name="password" [(ngModel)]="val.password" #password="ngModel" required
+          passwordStrength placeholder="Password">
+        <mat-error *ngIf="password.errors?.passwordStrength">Invalid Password</mat-error>
+        <mat-error *ngIf="password.errors?.required">
+          Email Mandatory
+        </mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="login(loginForm)">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
+        <!-- (click)="login(loginForm)" -->
         Login
       </button>
 
@@ -48,7 +56,7 @@
     <div class="form-val">
       <!-- {{loginForm.value | json}} directive : Dynamically Populate Value-->
       <!-- {{email.value + ' ' + password.value}} -->
-      {{email.errors | json}}
+      {{loginForm.value | json}}
 
     </div>
 
