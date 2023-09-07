@@ -19,7 +19,7 @@
         pattern="[a-z]+"
         placeholder="Email">
         <!--ngModel-Directive = Binds to key up event
-        required/ minlength/ pattern/ email/ maxlength - Form Validation-->
+        required/ minlength/ pattern/ email/ maxlength - 5 Form Validation-->
         <mat-error *ngIf="email.errors?.required">
           Email Mandatory
         </mat-error>
@@ -46,7 +46,7 @@
     </form>
 
     <div class="form-val">
-      <!-- {{loginForm.value | json}} directive -->
+      <!-- {{loginForm.value | json}} directive : Dynamically Populate Value-->
       <!-- {{email.value + ' ' + password.value}} -->
       {{email.errors | json}}
 
